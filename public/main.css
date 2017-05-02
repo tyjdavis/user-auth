@@ -1,0 +1,11 @@
+.login-error, .signup-error {
+  color: red;
+}
+
+button {
+    display: block;
+    width: 100%;
+    background-color: #277ab4;
+    color: #f5f9fb;
+    border-radius: 5px;
+}
