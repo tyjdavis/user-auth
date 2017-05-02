@@ -13,3 +13,7 @@ button {
 #message-button {
   background-color: #df504f;
 }
+
+.messagesection {
+  display: none;
+}
