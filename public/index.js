@@ -98,13 +98,12 @@ function signUpUser () {
   let dataObject = firebase.database().ref('data/');
   dataObject.on('value', function(snapshot) {
     if(snapshot.val()){
-    console.log(snapshot.val());
     let list = document.getElementById('list');
     list.innerHTML = '';
     let arr = Object.keys(snapshot.val()) //arr is an array of all the keys. nothing else
     arr.map(str=>{
       let li = document.createElement('li');
-      li.textContent = snapshot.val()[str].text;
+      li.innerHTML = snapshot.val()[str].email + ': ' + snapshot.val()[str].text;
       list.appendChild(li);
     })
   }
