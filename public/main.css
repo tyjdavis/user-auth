@@ -9,3 +9,7 @@ button {
     color: #f5f9fb;
     border-radius: 5px;
 }
+
+#message-button {
+  background-color: #df504f;
+}

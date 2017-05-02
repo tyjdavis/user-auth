@@ -1,7 +1,9 @@
+var database = firebase.database();
+
+
 //Login user
 
 let logInButton = document.getElementById('logIn');
-
 logInButton.addEventListener('click', logInUser)
 
 
@@ -20,9 +22,9 @@ function logInUser () {
     JWT();
 }
 
+//prints the JWT of the user to the console
 function JWT () {
   firebase.auth().currentUser.getToken(true).then(function(idToken) {
-
     console.log(idToken);
     }).catch(function(error) {
       // Handle error
@@ -33,7 +35,6 @@ function JWT () {
 //Create User
 
 let signUpButton = document.getElementById('signUp');
-
 signUpButton.addEventListener('click', signUpUser)
 
 
@@ -52,4 +53,16 @@ function signUpUser () {
     errorDiv.textContent = errorMessage;
     console.log(errorMessage);
   });
+}
+
+
+
+//messaging
+
+let messageButton = document.getElementById('message-button');
+messageButton.addEventListener('click', message);
+
+function message () {
+  let messageText = document.querySelector('#message').value;
+  console.log(messageText);
 }
