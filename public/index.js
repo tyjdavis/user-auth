@@ -20,8 +20,8 @@ logInButton.addEventListener('click', logInUser)
 
 function logInUser () {
 
-  let email = document.querySelector('#login-email').value;
-  let password = document.querySelector('#login-password').value;
+  let email = document.getElementById('login-email').value;
+  let password = document.getElementById('login-password').value;
 
   firebase.auth().signInWithEmailAndPassword(email, password)
   .then(function(user){
@@ -33,12 +33,13 @@ function logInUser () {
     var errorCode = error.code;
     var errorMessage = error.message;
   });
+
+    //message box
     let messageButton = document.getElementById('message-button');
     messageButton.addEventListener('click', message);
 
     function message () {
       let messageText = document.getElementById('message').value;
-
       firebase.database().ref('data/').push({
         email: email,
         text: messageText,
@@ -62,8 +63,8 @@ signUpButton.addEventListener('click', signUpUser)
 
 function signUpUser () {
 
-  let email = document.querySelector('#signup-email').value;
-  let password = document.querySelector('#signup-password').value;
+  let email = document.getElementById('signup-email').value;
+  let password = document.getElementById('signup-password').value;
   console.log("Email:", email, "Password:", password);
 
 
@@ -79,15 +80,32 @@ function signUpUser () {
     var errorMessage = error.message;
     console.log(errorMessage);
   });
+
+  //message box
   let messageButton = document.getElementById('message-button');
   messageButton.addEventListener('click', message);
 
   function message () {
     let messageText = document.getElementById('message').value;
-
     firebase.database().ref('data/').push({
       email: email,
       text: messageText,
     });
   }
 }
+
+//message box updating
+  let dataObject = firebase.database().ref('data/');
+  dataObject.on('value', function(snapshot) {
+    if(snapshot.val()){
+    console.log(snapshot.val());
+    let list = document.getElementById('list');
+    list.innerHTML = '';
+    let arr = Object.keys(snapshot.val()) //arr is an array of all the keys. nothing else
+    arr.map(str=>{
+      let li = document.createElement('li');
+      li.textContent = snapshot.val()[str].text;
+      list.appendChild(li);
+    })
+  }
+});
